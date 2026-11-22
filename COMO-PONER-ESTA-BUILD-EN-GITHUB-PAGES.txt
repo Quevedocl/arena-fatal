@@ -1,0 +1,43 @@
+ARENA FATAL - Torneo Definitivo
+Build web exportada (Godot 4.7.2, WASM + PCK). 100 % estatica: no necesita servidor propio.
+
+CONTENIDO DE ESTA CARPETA
+  index.html .................... pagina que arranca el juego (pantalla de carga en espanol)
+  index.js ...................... lanzador del motor
+  index.wasm .................... motor Godot compilado (WebAssembly)
+  index.pck ..................... paquete con el juego: plantel, arenas, FX, audio y textos
+  index.audio.worklet.js ........ audio del navegador (necesario)
+  index.audio.position.worklet.js audio del navegador (necesario)
+  index.icon.png / index.apple-touch-icon.png / index.png ... iconos que pide el lanzador
+  THIRD_PARTY_NOTICES.txt ....... avisos de licencias de terceros
+  open-source-licenses.html ..... las mismas licencias en formato legible
+
+SUBIDA A GITHUB PAGES (opcion recomendada: carpeta /docs)
+  1. Sube el CONTENIDO de esta carpeta (no la carpeta en si) a la rama que publicas,
+     dentro de una carpeta llamada  docs/ .
+  2. En el repositorio: Settings > Pages > Source: Deploy from a branch,
+     Branch: la rama que uses, Folder: /docs . Save.
+  3. En 1-2 minutos la pagina queda en  https://<usuario>.github.io/<repo>/ .
+
+OTRA OPCION: publicar desde la raiz del repositorio (GitHub Pages "root"):
+  sube estos archivos directamente en la raiz de la rama y elige Folder: /(root).
+  Si ademas quieres conservar el codigo fuente del juego, usa la opcion /docs.
+
+LO QUE NO HAY QUE CAMBIAR
+  - Los nombres de archivo: index.html busca index.js, index.wasm e index.pck por ruta
+    relativa. No renombres ni separes los archivos en subcarpetas.
+  - No hacen falta cabeceras especiales (COOP/COEP) porque la exportacion se genero sin
+    soporte de hilos de WebAssembly, asi que funciona en GitHub Pages tal cual.
+  - El servidor tiene que servir .wasm como application/wasm y .pck como
+    application/octet-stream: GitHub Pages ya lo hace. Con otros alojamientos habria que
+    configurarlo.
+
+PARA PROBARLO EN LOCAL ANTES DE SUBIRLO
+  Python 3 incluye servidor estatico:  python3 -m http.server 8000
+  y abre  http://localhost:8000/  (abrir el index.html con file:// no funciona: el
+  navegador bloquea la carga del .pck sin servidor HTTP).
+
+REQUISITOS DEL NAVEGADOR
+  WebGL2 o WebGPU, WebAssembly y unos 50 MB de descarga inicial (index.wasm 39,5 MB +
+  index.pck 9,3 MB + pagina y lanzador). Funciona en escritorio y en movil con mandos
+  tactiles automaticos. Audio: Chrome/Edge/Firefox/Safari actuales.
